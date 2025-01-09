@@ -11,7 +11,7 @@ const Conversations = () => {
 	}
   
 	return (
-	  <div className="py-2 flex flex-col overflow-auto">
+	  <div className="conversationa">
 		{conversations.length === 0 ? (
 		  <p>No conversations available</p>
 		) : (

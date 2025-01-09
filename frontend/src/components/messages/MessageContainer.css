@@ -1,92 +1,39 @@
+/* MessageContainer.css */
+
 .message-container {
-	width: 100%;
-	display: flex;
-	flex-direction: column; /* Stack header, body, and footer vertically */
-	height: 100vh; /* Full viewport height */
-	background-color: #ff0000; /* Red background */
-}
-.message-container .conversation{
+	flex: 1;
+	background-color: #fff;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	overflow-y: auto;
-}
-.message-container .conversation .conversation-header {
-	display: block;
-	padding: 10px;
-	background-color: #333;
-	color: white;
-	font-size: 18px;
-	font-weight: bold;
-}
-
-.conversation-header {
-	display: block;
-	padding: 10px;
-	background-color: #333;
-	color: white;
-	font-size: 18px;
-	font-weight: bold;
-}
-
-.conversation-body {
-	flex-grow: 1; /* This makes the conversation body take up the available space */
-	overflow-y: auto;
-	padding: 10px;
-}
-
-.conversation-body::-webkit-scrollbar {
-	width: 8px;
-}
-
-.conversation-body::-webkit-scrollbar-thumb {
-	background-color: #c1c1c1;
-	border-radius: 4px;
-}
-
-.conversation-body::-webkit-scrollbar-track {
-	background-color: #f5f5f5;
-}
-
-.conversation-footer {
-	padding: 10px;
-	background-color: #333;
+  }
+  
+  .message-container-content {
 	display: flex;
-	flex-direction: column; /* Ensure footer content stays in column */
-	gap: 10px;
-}
-
-.message-input {
-	width: 100%;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	font-size: 14px;
-}
-
-.send-button {
-	padding: 10px 15px;
-	background-color: #1e90ff;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	font-size: 14px;
-	cursor: pointer;
-}
-
-.send-button:hover {
-	background-color: #007acc;
-}
-
-.conversation-body::-webkit-scrollbar {
-	width: 8px;
-}
-
-.conversation-body::-webkit-scrollbar-thumb {
-	background-color: #c1c1c1;
-	border-radius: 4px;
-}
-
-.conversation-body::-webkit-scrollbar-track {
-	background-color: #f5f5f5;
-}
+	flex-direction: column;
+	height: 100%;
+  }
+  
+  .conversation-header {
+	background-color: #f0f0f0;
+	padding: 1rem;
+	border-bottom: 1px solid #ddd;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+  }
+  
+  .conversation-body {
+	flex: 1;
+	overflow-y: auto;
+	padding: 1rem;
+  }
+  
+  .conversation-footer {
+	background-color: #f0f0f0;
+	padding: 1rem;
+	border-top: 1px solid #ddd;
+	position: sticky;
+	bottom: 0;
+	z-index: 10;
+  }

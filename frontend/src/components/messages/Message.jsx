@@ -16,7 +16,7 @@ const Message = ({ message }) => {
 	const animationClass = message.shouldShake ? "shake" : "";
 
 	return (
-		<div className={`message-container ${alignmentClass}`}>
+		<div className={`${alignmentClass}`}>
 			<div className='message-avatar'>
 				<img alt='Profile' src={profileImage} className="avatar-image" />
 			</div>
