@@ -27,7 +27,7 @@ const Navbar = ({ onSearch, onRequests, onLogout, isLoading, isMobile, onBack })
           disabled={isLoading}
           aria-label="Logout"
         >
-          {isLoading ? "Logging out..." : "&#128683;"} {/* No entry symbol */}
+          {isLoading ? "Logging out..." : <span>&#128683;</span>} {/* No entry symbol */}
         </button>
       </div>
     </div>
