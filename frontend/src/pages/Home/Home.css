@@ -21,10 +21,15 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  align-items: center; /* Ensure items are vertically centered */
 }
 
 .app-title {
   margin: 0;
+}
+
+.hidden {
+  display: none;
 }
 
 .nav-options {
@@ -134,7 +139,7 @@
 /* Mobile view styles */
 @media (max-width: 768px) {
   .navbar .app-title {
-    display: none;
+    display: block;
   }
 
   .navbar .nav-button,
