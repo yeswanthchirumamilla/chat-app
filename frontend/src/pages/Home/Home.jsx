@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Home.css";
 import useLogout from "../../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
 import MessageContainer from "../../components/messages/MessageContainer";
 import Sidebar from "../../components/sidebar/Sidebar";
 
-const Navbar = ({ onSearch, onRequests, onLogout, isLoading }) => (
+const Navbar = ({ onSearch, onRequests, onLogout, isLoading, isMobile, onBack }) => (
   <nav className="navbar">
     <div className="navbar-content">
+      {isMobile && onBack && (
+        <button className="back-button" onClick={onBack} aria-label="Back">
+          &#8592; {/* Left arrow symbol */}
+        </button>
+      )}
       <h1 className="app-title">Chat Application</h1>
       <div className="nav-options">
         <button className="nav-button" onClick={onSearch} aria-label="Search">
-          Search
+          &#128269; {/* Magnifying glass symbol */}
         </button>
         <button className="nav-button" onClick={onRequests} aria-label="Requests">
-          Requests
+          &#128172; {/* Speech balloon symbol */}
         </button>
         <button
           className="logout-button"
@@ -22,28 +27,39 @@ const Navbar = ({ onSearch, onRequests, onLogout, isLoading }) => (
           disabled={isLoading}
           aria-label="Logout"
         >
-          {isLoading ? "Logging out..." : "Logout"}
+          {isLoading ? "Logging out..." : "&#128683;"} {/* No entry symbol */}
         </button>
       </div>
     </div>
   </nav>
 );
 
-const MainContent = () => (
+const MainContent = ({ isMobile, onConversationSelect }) => (
   <div className="main-content">
-    <Sidebar />
-    <MessageContainer />
+    <Sidebar onConversationSelect={onConversationSelect} />
+    {!isMobile && <MessageContainer />}
   </div>
 );
 
 const Home = () => {
   const navigate = useNavigate();
   const { logout, loading } = useLogout();
+  const [selectedConversation, setSelectedConversation] = useState(null);
 
   const handleLogout = async () => {
     await logout();
     if (!loading) navigate("/login");
   };
+
+  const handleConversationSelect = (conversation) => {
+    setSelectedConversation(conversation);
+  };
+
+  const handleBack = () => {
+    setSelectedConversation(null);
+  };
+
+  const isMobile = window.innerWidth <= 768;
 
   return (
     <div className="chat-app">
@@ -52,8 +68,14 @@ const Home = () => {
         onRequests={() => navigate("/requests")}
         onLogout={handleLogout}
         isLoading={loading}
+        isMobile={isMobile}
+        onBack={selectedConversation ? handleBack : null}
       />
-      <MainContent />
+      {selectedConversation ? (
+        <MessageContainer />
+      ) : (
+        <MainContent isMobile={isMobile} onConversationSelect={handleConversationSelect} />
+      )}
     </div>
   );
 };
