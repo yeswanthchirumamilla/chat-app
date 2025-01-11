@@ -1,9 +1,8 @@
-
 import { useAuthContext } from "../../context/AuthContext";
 import { extractTime } from "../../utils/extractTime";
 import useConversation from "../../zustand/useConversation";
-import { useEffect, useRef } from "react";
 import "./Message.css";
+
 
 const Message = ({ message }) => {
 	const { authUser } = useAuthContext();
@@ -16,14 +15,8 @@ const Message = ({ message }) => {
 
 	const animationClass = message.shouldShake ? "shake" : "";
 
-	const messageEndRef = useRef(null);
-
-	useEffect(() => {
-		messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
-	}, [message]);
-
 	return (
-		<div className={`${alignmentClass}`} ref={messageEndRef}>
+		<div className={`${alignmentClass}`}>
 			<div className='message-avatar'>
 				<img alt='Profile' src={profileImage} className="avatar-image" />
 			</div>
@@ -38,4 +31,3 @@ const Message = ({ message }) => {
 };
 
 export default Message;
-
