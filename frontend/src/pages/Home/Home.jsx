@@ -4,7 +4,6 @@ import useLogout from "../../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
 import MessageContainer from "../../components/messages/MessageContainer";
 import Sidebar from "../../components/sidebar/Sidebar";
-import HomeMobile from "./HomeMobile";
 
 const Navbar = ({ onSearch, onRequests, onLogout, isLoading }) => (
   <nav className="navbar">
@@ -17,54 +16,44 @@ const Navbar = ({ onSearch, onRequests, onLogout, isLoading }) => (
         <button className="nav-button" onClick={onRequests} aria-label="Requests">
           Requests
         </button>
-        <button className="nav-button" onClick={onLogout} aria-label="Logout">
-          Logout
+        <button
+          className="logout-button"
+          onClick={onLogout}
+          disabled={isLoading}
+          aria-label="Logout"
+        >
+          {isLoading ? "Logging out..." : "Logout"}
         </button>
       </div>
     </div>
   </nav>
 );
 
+const MainContent = () => (
+  <div className="main-content">
+    <Sidebar />
+    <MessageContainer />
+  </div>
+);
+
 const Home = () => {
   const navigate = useNavigate();
-  const { logout, isLoading } = useLogout();
-  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+  const { logout, loading } = useLogout();
 
-  React.useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const handleSearch = () => {
-    navigate("/search");
+  const handleLogout = async () => {
+    await logout();
+    if (!loading) navigate("/login");
   };
-
-  const handleRequests = () => {
-    navigate("/requests");
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
-
-  if (isMobile) {
-    return <HomeMobile />;
-  }
 
   return (
-    <div className="home">
+    <div className="chat-app">
       <Navbar
-        onSearch={handleSearch}
-        onRequests={handleRequests}
+        onSearch={() => navigate("/search")}
+        onRequests={() => navigate("/requests")}
         onLogout={handleLogout}
-        isLoading={isLoading}
+        isLoading={loading}
       />
-      <Sidebar />
-      <MessageContainer />
+      <MainContent />
     </div>
   );
 };
