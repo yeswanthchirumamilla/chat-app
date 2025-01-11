@@ -33,8 +33,7 @@
 }
 
 .nav-button,
-.logout-button,
-.back-button {
+.logout-button {
   background-color: #555;
   border: none;
   color: #fff;
@@ -43,8 +42,7 @@
 }
 
 .nav-button:hover,
-.logout-button:hover,
-.back-button:hover {
+.logout-button:hover {
   background-color: #777;
 }
 
@@ -129,24 +127,4 @@
 .no-chat-icon {
   font-size: 2rem;
   margin-top: 1rem;
-}
-
-/* Mobile view styles */
-@media (max-width: 768px) {
-  .navbar .app-title {
-    display: none;
-  }
-
-  .navbar .nav-button,
-  .navbar .logout-button {
-    padding: 0.5rem;
-  }
-
-  .main-content {
-    display: none;
-  }
-
-  .message-container {
-    display: flex;
-  }
 }
