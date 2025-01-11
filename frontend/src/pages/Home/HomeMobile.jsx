@@ -1,30 +1,3 @@
-import React, { useEffect, useState } from "react";
-import "./Home.css";
-import useLogout from "../../hooks/useLogout";
-import { useNavigate } from "react-router-dom";
-import MessageContainer from "../../components/messages/MessageContainer";
-import Sidebar from "../../components/sidebar/Sidebar";
-import { FaSearch, FaUserFriends, FaSignOutAlt } from "react-icons/fa";
-import ConversationList from "../../components/conversations/ConversationList";
-
-const NavbarMobile = ({ onSearch, onRequests, onLogout, isLoading }) => (
-  <nav className="navbar-mobile">
-    <div className="navbar-content">
-      <h1 className="app-title">Chat App</h1>
-      <div className="nav-options">
-        <button className="nav-button" onClick={onSearch} aria-label="Search">
-          <FaSearch />
-        </button>
-        <button className="nav-button" onClick={onRequests} aria-label="Requests">
-          <FaUserFriends />
-        </button>
-        <button className="nav-button" onClick={onLogout} aria-label="Logout">
-          <FaSignOutAlt />
-        </button>
-      </div>
-    </div>
-  </nav>
-);
 
 const HomeMobile = () => {
   const navigate = useNavigate();
@@ -62,18 +35,6 @@ const HomeMobile = () => {
 
   return (
     <div className="home-mobile">
-      <NavbarMobile
-        onSearch={handleSearch}
-        onRequests={handleRequests}
-        onLogout={handleLogout}
-        isLoading={isLoading}
-      />
-      <Sidebar />
-      <ConversationList
-        conversations={conversations}
-        onSelectConversation={handleSelectConversation}
-      />
-      <MessageContainer />
     </div>
   );
 };
